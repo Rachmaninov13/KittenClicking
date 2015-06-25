@@ -1,4 +1,4 @@
-var game = gamePage;
+var script = gamePage;
 
 var opts = {
 	interval : 5000,
@@ -77,26 +77,29 @@ cycle.prototype = {
 		if(opts.build) this.build();
 		if(opts.craft) this.craft();
 		if(opts.trade) this.trade();
+		script.msg("Looped.");
 	},
 	//gaze to the heavens
 	observe: function () {
 		if(this.observeBtn) {
-			game.calendar.observeHandler();
+			script.calendar.observeHandler();
 		}
 	},
 	//praise the sun
 	religion: function () {
-		game.religion.praise();
+		script.religion.praise();
 	},
 	//Use our power
 	village: function () {
-		if(game.calendar.festivalDays === 0 && game.villageTab.festivalBtn.hasResources()){
-			game.villageTab.festivalBtn.onClick();
+		if(script.calendar.festivalDays === 0 && script.villageTab.festivalBtn.hasResources()){
+			script.villageTab.festivalBtn.onClick();
 		}
 		do {
-			game.villageTab.huntBtn.onClick();
+			script.villageTab.huntBtn.onClick();
 		}
-		while(game.resPool.get("manpower").value > gamePage.resPool.get("manpower").maxValue/2);
+		while(script.resPool.get("manpower").value > script.resPool.get("manpower").maxValue/2);
+		script.clearLog();
+		
 	},
 	//build us up
 	build: function () {
@@ -104,12 +107,12 @@ cycle.prototype = {
 	},
 	//craft the excess
 	craft: function () {
-		
+		script.clearLog();
 	},
 	//sharing is caring
 	trade: function () {
-		
+		script.clearLog();
 	}
 };
 
-var gameCycle = new cycle();
+var scriptCycle = new cycle();
