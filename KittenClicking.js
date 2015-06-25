@@ -105,7 +105,7 @@ cycle.prototype = {
 		if(script.calendar.festivalDays === 0 && script.villageTab.festivalBtn.hasResources()){
 			script.villageTab.festivalBtn.onClick();
 		}
-	}
+	},
 	//build us up
 	build: function () {
 		
