@@ -55,7 +55,7 @@ var flagStock = {
 	compedium : {stock : 0, priority : 0},
 	blueprint : {stock : 0, priority : 0},
 	megalith : {stock : 0, priority : 0}
-}
+};
 	
 
 var cycle = function() {
