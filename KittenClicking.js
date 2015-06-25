@@ -11,13 +11,51 @@ var opts = {
 };
 
 var flagStock = {
-	catnip : 0,
-	wood : 0,
-	minerals : 0,
-	coal : 0,
-	iron : 0,
-	titanium : 0,
-	gold : 0,
+	catnip : {stock : 0, priority : 0},
+	wood : {stock : 0, priority : 0},
+	minerals : {stock : 0, priority : 0},
+	coal : {stock : 0, priority : 0},
+	iron : {stock : 0, priority : 0},
+	titanium : {stock : 0, priority : 0},
+	gold : {stock : 0, priority : 0},
+	oil : {stock : 0, priority : 0},
+	uranium : {stock : 0, priority : 0},
+	unobtainium : {stock : 0, priority : 0},
+	
+	manpower : {stock : 0, priority : 0},
+	science : {stock : 0, priority : 0},
+	culture : {stock : 0, priority : 0},
+	faith : {stock : 0, priority : 0},
+	starchart : {stock : 0, priority : 0},
+	antimatter : {stock : 0, priority : 0},
+	
+	furs : {stock : 0, priority : 0},
+	ivory : {stock : 0, priority : 0},
+	spice : {stock : 0, priority : 0},
+	unicorns : {stock : 0, priority : 0},
+	alicorn : {stock : 0, priority : 0},
+	necrocorn : {stock : 0, priority : 0},
+	tears : {stock : 0, priority : 0},
+	timeCrystal : {stock : 0, priority : 0},
+	sorrow : {stock : 0, priority : 0},
+	
+	beam : {stock : 0, priority : 0},
+	slab : {stock : 0, priority : 0},
+	concrate : {stock : 0, priority : 0},
+	plate : {stock : 0, priority : 0},
+	steel : {stock : 0, priority : 0},
+	alloy : {stock : 0, priority : 0},
+	eludium : {stock : 0, priority : 0},
+	gear : {stock : 0, priority : 0},
+	scaffold : {stock : 0, priority : 0},
+	ship : {stock : 0, priority : 0},
+	tanker : {stock : 0, priority : 0},
+	parchment : {stock : 0, priority : 0},
+	manuscript : {stock : 0, priority : 0},
+	compedium : {stock : 0, priority : 0},
+	blueprint : {stock : 0, priority : 0},
+	megalith : {stock : 0, priority : 0}
+}
 	
 
 var cycle = function() {
@@ -32,12 +70,12 @@ var cycle = function() {
 		this.loop = undefined;
 	}
 	iterate: function() {
-		this.observe();
-		this.religion();
-		this.village();
-		this.build();
-		this.craft();
-		//this.trade();
+		if(opts.observe) this.observe();
+		if(opts.religion) this.religion();
+		if(opts.village) this.village();
+		if(opts.build) this.build();
+		if(opts.craft) this.craft();
+		if(opts.trade) this.trade();
 	};
 	//gaze to the heavens
 	observe: function() {
@@ -62,5 +100,14 @@ var cycle = function() {
 	//build us up
 	build: function() {
 		
+	}
+	//craft the excess
+	craft: function() {
+		
+	}
+	//sharing is caring
+	trade: function() {
+		
+	}
 };
 
