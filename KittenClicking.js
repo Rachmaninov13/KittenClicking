@@ -57,12 +57,13 @@ var flagStock = {
 	megalith : {stock : 0, priority : 0}
 };
 	
+var cycle = function () {};
 
-var cycle = function () {
+cycle.prototype = {
 	loop: undefined,
 	start: function () {
 		if(this.loop) return;
-		this.loop = setInterval(this.iterate.bind(this),options.interval);
+		this.loop = setInterval(this.iterate.bind(this),opts.interval);
 	},
 	stop: function () {
 		if(!this.loop) return;
@@ -95,7 +96,7 @@ var cycle = function () {
 		do {
 			game.villageTab.huntBtn.onClick();
 		}
-		while(game.resPool.get("manpower").value > gamePage.resPool.get("manpower").maxValue/2)
+		while(game.resPool.get("manpower").value > gamePage.resPool.get("manpower").maxValue/2);
 	},
 	//build us up
 	build: function () {
