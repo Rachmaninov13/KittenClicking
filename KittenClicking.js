@@ -58,37 +58,37 @@ var flagStock = {
 };
 	
 
-var cycle = function() {
+var cycle = function () {
 	loop: undefined,
-	start: function() {
+	start: function () {
 		if(this.loop) return;
 		this.loop = setInterval(this.iterate.bind(this),options.interval);
 	},
-	stop: function() {
+	stop: function () {
 		if(!this.loop) return;
 		clearInterval(this.loop);
 		this.loop = undefined;
-	}
-	iterate: function() {
+	},
+	iterate: function () {
 		if(opts.observe) this.observe();
 		if(opts.religion) this.religion();
 		if(opts.village) this.village();
 		if(opts.build) this.build();
 		if(opts.craft) this.craft();
 		if(opts.trade) this.trade();
-	};
+	},
 	//gaze to the heavens
-	observe: function() {
+	observe: function () {
 		if(this.observeBtn) {
 			game.calendar.observeHandler();
 		}
-	}
+	},
 	//praise the sun
-	religion: function() {
+	religion: function () {
 		game.religion.praise();
-	}
+	},
 	//Use our power
-	village: function() {
+	village: function () {
 		if(game.calendar.festivalDays === 0 && game.villageTab.festivalBtn.hasResources()){
 			game.villageTab.festivalBtn.onClick();
 		}
@@ -96,17 +96,17 @@ var cycle = function() {
 			game.villageTab.huntBtn.onClick();
 		}
 		while(game.resPool.get("manpower").value > gamePage.resPool.get("manpower").maxValue/2)
-	}
+	},
 	//build us up
-	build: function() {
+	build: function () {
 		
-	}
+	},
 	//craft the excess
-	craft: function() {
+	craft: function () {
 		
-	}
+	},
 	//sharing is caring
-	trade: function() {
+	trade: function () {
 		
 	}
 };
