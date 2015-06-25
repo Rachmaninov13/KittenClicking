@@ -112,3 +112,4 @@ cycle.prototype = {
 	}
 };
 
+var gameCycle = new cycle();
