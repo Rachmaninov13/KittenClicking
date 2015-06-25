@@ -3,7 +3,8 @@ var script = gamePage;
 var opts = {
 	interval : 5000,
 	religion : 0,
-	village : 0,
+	hunt : 0,
+	festival : 0,
 	build : 0,
 	craft : 0,
 	observe : 0,
@@ -73,7 +74,8 @@ cycle.prototype = {
 	iterate: function () {
 		if(opts.observe) this.observe();
 		if(opts.religion) this.religion();
-		if(opts.village) this.village();
+		if(opts.hunt) this.hunt();
+		if(opts.festival) this.festival();
 		if(opts.build) this.build();
 		if(opts.craft) this.craft();
 		if(opts.trade) this.trade();
@@ -90,10 +92,7 @@ cycle.prototype = {
 		script.religion.praise();
 	},
 	//Use our power
-	village: function () {
-		if(script.calendar.festivalDays === 0 && script.villageTab.festivalBtn.hasResources()){
-			script.villageTab.festivalBtn.onClick();
-		}
+	hunt: function () {
 		do {
 			script.villageTab.huntBtn.onClick();
 		}
@@ -101,6 +100,12 @@ cycle.prototype = {
 		script.clearLog();
 		
 	},
+	//celebrate
+	festival: function () {
+		if(script.calendar.festivalDays === 0 && script.villageTab.festivalBtn.hasResources()){
+			script.villageTab.festivalBtn.onClick();
+		}
+	}
 	//build us up
 	build: function () {
 		
