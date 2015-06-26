@@ -147,7 +147,8 @@ cycle.prototype = {
 					var free = script.resPool.get(costPer[i].name) - flagStock[costPer[i].name].stock; //find how much of the given prereq is free
 					crafts = Math.min(crafts,Math.floor(free/costPer[i].price)); //lower crafts to how many that's good for
 				}
-				script.workshop.craft(name,crafts);
+				console.log(name + " " + crafts);
+				//script.workshop.craft(name,crafts);
 			}
 		}
 	},
