@@ -141,11 +141,13 @@ cycle.prototype = {
 		for (var name in craftables){
 			var res = craftables[name];
 			if(res.autocraft === 1){
-				var crafts = Number.MAX_VALUE; //assume infinite crafts
+				var crafts = Number.MAX_SAFE_INTEGER; //assume infinite crafts
 				var costPer = script.workshop.getCraft(name).prices; //get price array
 				for(var i = 0; i < costPer.length; i++){
 					var free = script.resPool.get(costPer[i].name) - flagStock[costPer[i].name].stock; //find how much of the given prereq is free
+					console.log(free + " of " + costPer[i].name + "available.");
 					crafts = Math.min(crafts,Math.floor(free/costPer[i].price)); //lower crafts to how many that's good for
+					console.log("Crafts set to " + crafts);
 				}
 				console.log(name + " " + crafts);
 				//script.workshop.craft(name,crafts);
