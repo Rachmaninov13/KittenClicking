@@ -7,7 +7,7 @@ var opts = {
 	festival : 0,
 	build : 0,
 	craft : 0,
-	observe : 0,
+	observe : 1,
 	trade : 0
 };
 
@@ -147,7 +147,7 @@ cycle.prototype = {
 					var free = script.resPool.get(costPer[i].name) - flagStock[costPer[i].name].stock; //find how much of the given prereq is free
 					crafts = Math.min(crafts,Math.floor(free/costPer[i].price)); //lower crafts to how many that's good for
 				}
-				craft(name,crafts);
+				script.workshop.craft(name,crafts);
 			}
 		}
 	},
