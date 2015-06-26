@@ -57,6 +57,26 @@ var flagStock = {
 	blueprint : {stock : 0, priority : 0},
 	megalith : {stock : 0, priority : 0}
 };
+
+var craftables = {
+	wood: {autocraft: 1},
+	beam: {autocraft: 1},
+	slab: {autocraft: 1},
+	steel: {autocraft: 1},
+	plate: {autocraft: 1},
+	alloy: {autocraft: 0},
+	concrate: {autocraft: 0},
+	gear: {autocraft: 0},
+	scaffold: {autocraft: 0},
+	ship: {autocraft: 0},
+	tanker: {autocraft: 0},
+	parchment: {autocraft: 1},
+	manuscript: {autocraft: 1},
+	compedium: {autocraft: 0},
+	blueprint: {autocraft: 0},
+	megalith: {autocraft: 0},
+	eludium: {autocraft: 0}
+};
 	
 var cycle = function () {};
 
@@ -72,9 +92,9 @@ cycle.prototype = {
 		this.loop = undefined;
 	},
 	iterate: function () {
+		if(opts.hunt) this.hunt();
 		if(opts.observe) this.observe();
 		if(opts.religion) this.religion();
-		if(opts.hunt) this.hunt();
 		if(opts.festival) this.festival();
 		if(opts.build) this.build();
 		if(opts.craft) this.craft();
@@ -83,13 +103,17 @@ cycle.prototype = {
 	},
 	//gaze to the heavens
 	observe: function () {
-		if(this.observeBtn) {
+		if(script.calendar.observeBtn) {
 			script.calendar.observeHandler();
+			script.msg("Observed.");
 		}
 	},
 	//praise the sun
 	religion: function () {
-		script.religion.praise();
+		if(flagStock.faith.stock === 0)	{
+			script.religion.praise();
+			script.msg("Praised.");
+		}
 	},
 	//Use our power
 	hunt: function () {
@@ -98,12 +122,14 @@ cycle.prototype = {
 		}
 		while(script.resPool.get("manpower").value > script.resPool.get("manpower").maxValue/2);
 		script.clearLog();
+		script.msg("Hunted.");
 		
 	},
 	//celebrate
 	festival: function () {
 		if(script.calendar.festivalDays === 0 && script.villageTab.festivalBtn.hasResources()){
 			script.villageTab.festivalBtn.onClick();
+			script.msg("Festivaled.");
 		}
 	},
 	//build us up
@@ -112,7 +138,18 @@ cycle.prototype = {
 	},
 	//craft the excess
 	craft: function () {
-		script.clearLog();
+		for (var name in craftables){
+			var res = craftables[name];
+			if(res.autocraft === 1){
+				var crafts = Number.MAX_VALUE; //assume infinite crafts
+				var costPer = script.workshop.getCraft(name).prices; //get price array
+				for(var i = 0; i < costPer.length; i++){
+					var free = script.resPool.get(costPer[i].name) - flagStock[costPer[i].name].stock; //find how much of the given prereq is free
+					crafts = Math.min(crafts,Math.floor(free/costPer[i].price)); //lower crafts to how many that's good for
+				}
+				craft(name,crafts);
+			}
+		}
 	},
 	//sharing is caring
 	trade: function () {
