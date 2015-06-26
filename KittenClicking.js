@@ -3,7 +3,7 @@ var script = gamePage;
 var opts = {
 	interval : 5000,
 	religion : 0,
-	hunt : 0,
+	hunt : 1,
 	festival : 0,
 	build : 0,
 	craft : 0,
@@ -12,7 +12,7 @@ var opts = {
 };
 
 var flagStock = {
-	catnip : {stock : 0, priority : 0},
+	catnip : {stock : 2000, priority : 0},
 	wood : {stock : 0, priority : 0},
 	minerals : {stock : 0, priority : 0},
 	coal : {stock : 0, priority : 0},
@@ -30,9 +30,9 @@ var flagStock = {
 	starchart : {stock : 0, priority : 0},
 	antimatter : {stock : 0, priority : 0},
 	
-	furs : {stock : 0, priority : 0},
-	ivory : {stock : 0, priority : 0},
-	spice : {stock : 0, priority : 0},
+	furs : {stock : 1000, priority : 0},
+	ivory : {stock : 500, priority : 0},
+	spice : {stock : 500, priority : 0},
 	unicorns : {stock : 0, priority : 0},
 	alicorn : {stock : 0, priority : 0},
 	necrocorn : {stock : 0, priority : 0},
@@ -145,10 +145,9 @@ cycle.prototype = {
 				var costPer = script.workshop.getCraft(name).prices; //get price array
 				for(var i = 0; i < costPer.length; i++){
 					var free = script.resPool.get(costPer[i].name).value - flagStock[costPer[i].name].stock; //find how much of the given prereq is free
-					crafts = Math.min(crafts,Math.floor(free/costPer[i].price)); //lower crafts to how many that's good for
+					crafts = Math.min(crafts,Math.floor(free/costPer[i].val)); //lower crafts to how many that's good for
 				}
-				console.log(name + " " + crafts);
-				//script.workshop.craft(name,crafts);
+				script.workshop.craft(name,crafts);
 			}
 		}
 	},
