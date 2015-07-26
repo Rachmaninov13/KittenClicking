@@ -23,7 +23,7 @@ var flagStock = {
 	uranium : {stock : 0, priority : 0},
 	unobtainium : {stock : 0, priority : 0},
 	
-	manpower : {stock : 0, priority : 0},
+	manpower : {stock : 2000, priority : 0},
 	science : {stock : 0, priority : 0},
 	culture : {stock : 0, priority : 0},
 	faith : {stock : 0, priority : 0},
@@ -117,10 +117,12 @@ cycle.prototype = {
 	},
 	//Use our power
 	hunt: function () {
+		var hunts = (script.resPool.get("manpower").value - flagStock.manpower.stock)/100
 		do {
 			script.villageTab.huntBtn.onClick();
+			hunts--;
 		}
-		while(script.resPool.get("manpower").value > script.resPool.get("manpower").maxValue/2);
+		while(hunts > 0);
 		script.clearLog();
 		script.msg("Hunted.");
 		
